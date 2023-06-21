@@ -22,16 +22,37 @@ While the proposed 'fair value' of a contract is useful for both teams and playe
 
 ## Data Understanding
 
+The data set consists of approximately 5500 NHL contracts that have been signed since 2006, which is the onset of the hard salary cap era. The final model predicts contract annual values and lengths for approximately 150 pending free agents. 
 
 ## Modeling
 
+The modeling process for this project is twofold; because we are trying to predict the value of a player's contract, we need to separately model the annual cap hit of the contract, as well as the length of the contract. The annual dollar value (AAV) of the contract multiplied by the length of the contract gives the total contract value. 
 
-## Deployment
+First, the data needs to be further prepared for modeling. This involves splitting the data into training and test sets, encoding the categorical variables, and scaling the numeric variables. 
 
+Second, for the model approaches used, cross-validation will be performed on the training set. We will use grid search with cross-validation to obtain the best parameters for each model tested.
 
-## Conclusion
+Finally, a final model with the selected parameterization will be fitted on the full training set, and then run on the test set. The final model with the lowest mean average error on the test set will be selected as the final model and used for prediction on the new data. 
 
+The choice of scoring metric is an important one in model selection, because choosing a model based on one metric or another might ultimately lead to a different set of predictions with new data. For regression-based error metrics, two typical choices are mean average error and root mean squared error. I have chosen mean average error as the preferred metric for two reasons:
 
+1. the error term becomes directly interpretable; we are able to say that any predicted contract is on average off by some amount of yearly value and length, which gives the stakeholders a direct intuition for the usefulness of the model.
+2. without a bias towards a certain kind of error distribution - for example, we cannot say with certainty that being off by a lot on a single contract is worse than being off by a lesser amount on multiple - the mean average error becomes the more conservative choice of metric.
+
+## Conclusions and Future Improvements
+
+On an absolute basis, we can conclude that the model predicts contract values pretty well, while it struggles more with contract length. This is not altogether unexpected, because contract length may ultimately be a better function of different features, which gives room to improve the project. In particular, player health metrics, injury history, and reputation / franchise value might be useful to incorporate in future versions of the model, and those features might be better predictors of the length of a contract a player ultimately signs.
+
+In terms of contract value, out-of-sample MAE of xxx is a strong result in terms of what it actually represents - to think that the model is off by less than 1% of the salary cap suggests that the contract market can indeed be very efficient, and suggests two further findings that can be tested:
+
+* that the occurrence of so-called 'bad contracts' come down to contract length rather than contract value
+* there is further room for teams to improve their analysis on the contracts they issue and further optimize
+
+As for the project on the whole, there are a few more improvements to be had, in addition to improving the features used. Those would be:
+
+* increasing the number of player statistics tested, as well as the granularity of those statistics (looking at the game level rather than the season level, for example)
+* testing more unsupervised learning models, particularly neural networks
+* expanding the analysis to goalies, which were not used in this project because they require a different set of statistics
 
 ## Repository structure
 
