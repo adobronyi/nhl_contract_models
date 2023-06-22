@@ -14,6 +14,8 @@ Included in this repository is an environment file that can be used to replicate
 
 'conda env create -f environment.yml'
 
+The environment must then be activated to proceed.
+
 ## Business Understanding
 
 Most modern professional sports teams are governed by league rules whereby they can sign athletes to contracts under certain constraints. Depending on the sport and league rules, players, perhaps with the help of agents, can arrange for a payout over a given number of years. With the vast increase in statistical data for sports, there has been more publicity surrounding these contract signings and the seemingly ever-increasing payouts these athletes receive. For this project, we will examine how player data and statistics, specifically in professional hockey, influence the value of a contract free agents end up signing.
@@ -39,11 +41,15 @@ The choice of scoring metric is an important one in model selection, because cho
 1. the error term becomes directly interpretable; we are able to say that any predicted contract is on average off by some amount of yearly value and length, which gives the stakeholders a direct intuition for the usefulness of the model.
 2. without a bias towards a certain kind of error distribution - for example, we cannot say with certainty that being off by a lot on a single contract is worse than being off by a lesser amount on multiple - the mean average error becomes the more conservative choice of metric.
 
+## Deployment
+
+Based on MAE, the chosen error metric, the models used should be random forest regression for predicting annual contract value, and XGBoost regression for predicting contract length. It is worth noting that with even a small change in data, or perhaps even further optimization, the model selection could end up being different; however, for the sake of ease, we will select the final model solely on the basis of MAE.
+
 ## Conclusions and Future Improvements
 
 On an absolute basis, we can conclude that the model predicts contract values pretty well, while it struggles more with contract length. This is not altogether unexpected, because contract length may ultimately be a better function of different features, which gives room to improve the project. In particular, player health metrics, injury history, and reputation / franchise value might be useful to incorporate in future versions of the model, and those features might be better predictors of the length of a contract a player ultimately signs.
 
-In terms of contract value, out-of-sample MAE of xxx is a strong result in terms of what it actually represents - to think that the model is off by less than 1% of the salary cap suggests that the contract market can indeed be very efficient, and suggests two further findings that can be tested:
+In terms of contract value, out-of-sample MAE of about 0.005 is a strong result in terms of what it actually represents - to think that the model is off by less than 1% of the salary cap suggests that the contract market can indeed be very efficient, and suggests two further findings that can be tested:
 
 * that the occurrence of so-called 'bad contracts' come down to contract length rather than contract value
 * there is further room for teams to improve their analysis on the contracts they issue and further optimize
