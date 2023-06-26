@@ -12,7 +12,7 @@ This project builds a model to predict NHL contract values, via modeling the two
 
 Included in this repository is an environment file that can be used to replicate the environment in which the notebooks should be run. To do, run the following line in terminal upon downloading the environment file:
 
-'conda env create -f environment.yml'
+'''conda env create -f environment.yml'''
 
 The environment must then be activated to proceed.
 
@@ -53,6 +53,14 @@ Here is a summary of the models tested and their error terms:
 ## Deployment
 
 Based on MAE, the chosen error metric, the models used should be random forest regression for predicting annual contract value, and XGBoost regression for predicting contract length. It is worth noting that with even a small change in data, or perhaps even further optimization, the model selection could end up being different; however, for the sake of ease, we will select the final model solely on the basis of MAE.
+
+The model chosen to predict contract annual values was the random forest regression, which had the following most important features:
+![fig3](./figures/fig3.png)
+
+The model chosen to predict contract annual values was the random forest regression, which had the following most important features:
+![fig4](./figures/fig4.png)
+
+It is notable that the most important feature by some margin in each model was average assists. Moreover, the features of secondary importance were similar between the models, though a little more diverse in expression, but still encapsulated time on ice, contract age, and total points in some capacity.
 
 The deliverable for the project is a table showing current free agents and their suggested annual contract values and contract lengths, from which a subset is below:
 ![fig5](./figures/fig5.png)
