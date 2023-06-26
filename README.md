@@ -8,7 +8,7 @@
 
 ## Overview
 
-This project builds a model to predict NHL contract values, via modeling the two components of the contract: the annual value and the length of the contract. The notebook [data_scrape.ipynb](https://github.com/adobronyi/predicting_movie_recommendations/blob/main/student_v1.ipynb) goes through the process of scraping the NHL API and other websites to obtain player and contract data for the purpose of training and testing the models; it also scrapes information on pending free agents. The notebook [model.ipynb](https://github.com/adobronyi/predicting_movie_recommendations/blob/main/presentation.pdf) goes through the EDA and modeling process, and deploys the final models to output the deliverable, which is a list of pending free agents and the model's predicted contract values. Finally, the [presentation] provides and overview of the business and technical aspects of the project.
+This project builds a model to predict NHL contract values, via modeling the two components of the contract: the annual value and the length of the contract. The notebook [data_scrape.ipynb](https://github.com/adobronyi/predicting_movie_recommendations/blob/main/student_v1.ipynb) goes through the process of scraping the NHL API and other websites to obtain player and contract data for the purpose of training and testing the models; it also scrapes information on pending free agents. The notebook [model.ipynb](https://github.com/adobronyi/predicting_movie_recommendations/blob/main/presentation.pdf) goes through the EDA and modeling process, and deploys the final models to output the deliverable, which is a list of pending free agents and the model's predicted contract values. Finally, the [presentation](https://github.com/adobronyi/nhl_contract_models/blob/main/presentation.pdf) provides and overview of the business and technical aspects of the project.
 
 Included in this repository is an environment file that can be used to replicate the environment in which the notebooks should be run. To do, run the following line in terminal upon downloading the environment file:
 
@@ -26,6 +26,12 @@ While the proposed 'fair value' of a contract is useful for both teams and playe
 
 The data set consists of approximately 5500 NHL contracts that have been signed since 2006, which is the onset of the hard salary cap era. The final model predicts contract annual values and lengths for approximately 150 pending free agents. 
 
+The distribution of the dependent variables show that most contracts signed are one to two years in length, and that the average annual contract value is about 2.5% of the salary cap, or about 2 million dollars with the current salary cap.
+
+![fig6](./figures/fig6.png)
+
+![fig7](./figures/fig7.png)
+
 ## Modeling
 
 The modeling process for this project is twofold; because we are trying to predict the value of a player's contract, we need to separately model the annual cap hit of the contract, as well as the length of the contract. The annual dollar value (AAV) of the contract multiplied by the length of the contract gives the total contract value. 
@@ -41,9 +47,15 @@ The choice of scoring metric is an important one in model selection, because cho
 1. the error term becomes directly interpretable; we are able to say that any predicted contract is on average off by some amount of yearly value and length, which gives the stakeholders a direct intuition for the usefulness of the model.
 2. without a bias towards a certain kind of error distribution - for example, we cannot say with certainty that being off by a lot on a single contract is worse than being off by a lesser amount on multiple - the mean average error becomes the more conservative choice of metric.
 
+Here is a summary of the models tested and their error terms:
+![fig1](./figures/fig1.png)
+
 ## Deployment
 
 Based on MAE, the chosen error metric, the models used should be random forest regression for predicting annual contract value, and XGBoost regression for predicting contract length. It is worth noting that with even a small change in data, or perhaps even further optimization, the model selection could end up being different; however, for the sake of ease, we will select the final model solely on the basis of MAE.
+
+The deliverable for the project is a table showing current free agents and their suggested annual contract values and contract lengths, from which a subset is below:
+![fig5](./figures/fig5.png)
 
 ## Conclusions and Future Improvements
 
