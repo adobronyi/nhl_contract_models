@@ -12,7 +12,9 @@ This project builds a model to predict NHL contract values, via modeling the two
 
 Included in this repository is an environment file that can be used to replicate the environment in which the notebooks should be run. To do, run the following line in terminal upon downloading the environment file:
 
-'''conda env create -f environment.yml'''
+'''
+conda env create -f environment.yml
+'''
 
 The environment must then be activated to proceed.
 
